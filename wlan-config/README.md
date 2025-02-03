@@ -4,13 +4,16 @@ To setup WLC from the management PC use the web browser to access http://<WLC IP
 
 Setup credentials, example:
 - user: admin
-- password: admin123
+- password: Admin123
 
 Setup the first network IT-NET (WPA2 Personal)
 password: itnet123
 
 RADIUS-SERVER:
+Client IP: <router IP>
 secret: radius123
-
+- User Setup
+    user: user1
+    password: test
 
 
