@@ -26,3 +26,34 @@ access-class 3 in
 (configure)# access-lsit 3 permit 10.1.1.0 0.0.0.255 # only allows login consoles from that network
 ```
 
+## Switchport Security 
+From chapter 6 
+
+- Preconfigure the vlans and router sub interfaces, router 0 example:
+```bash 
+Router(config)#int gi0/1.1
+Router(config-subif)#encapsulation dot1q 1 native
+Router(config-subif)#ip address 10.1.1.1 255.255.255.0
+Router(config-subif)#no shutdown
+Router(config-subif)#int gi0/1.2
+Router(config-subif)#encapsulation dot1q 2
+Router(config-subif)#ip address 10.1.2.1 255.255.255.0
+Router(config-subif)#no shutdown
+```
+- Preconfigure vlans in switches:
+
+```bash
+Switch(config)#vlan 2
+Switch(config-vlan)#name server-vlan
+Switch(config-vlan)#exit
+Switch(config)#int fa0/1
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 2
+Switch(config-if)#int gi0/2
+Switch(config-if)#switchport mode trunk
+```
+
+Implementing switchport security:
+
+```bash
+```
