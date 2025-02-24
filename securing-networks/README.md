@@ -53,7 +53,54 @@ Switch(config-if)#int gi0/2
 Switch(config-if)#switchport mode trunk
 ```
 
-Implementing switchport security:
+#### Implementing switchport security:
+
+1. Known source MAC address:
+```bash
+Switch(config-if)#int fa0/1
+Switch(config-if)#switchport port-security 
+Switch(config-if)#switchport port-security mac-address 00D0.BC4D.D622
+```
+2. Sticky learn dinamically learned MAC addresses
+```bash
+Switch(config-if)#int gi0/2
+Switch(config-if)#switchport port-security
+Switch(config-if)#switchport port-security mac-address sticky
+```
+
+3. Maximum 1 source addresses
+```bash
+Switch(config)#int gi0/2
+Switch(config-if)#int fa0/1
+Switch(config-if)#switchport port-
+Switch(config-if)#switchport port-security maximum 1
+```
+
+#### Verifying switchport security
 
 ```bash
+Switch>enable
+Switch#show port-security int fa0/1
+Switch#show mac address-table secure
+Switch#show mac address-table static
+Switch#show mac address-table dynamic
+```
+
+#### Switchport security violations
+
+```bash
+switchport port-security violation {protect|restrict|shutdown}
+```
+
+- for shutdown:
+```
+errdisable recovery cause psecure-violation
+errrdisable recovery interval <seconds>
+```
+
+- for remote connections to switch
+```bash
+Switch(config)#int vlan 1
+Switch(config-if)#ip address 10.1.1.100 255.255.255.0 # or use ip address dhcp
+Switch(config-if)#no shutdown
 ```
