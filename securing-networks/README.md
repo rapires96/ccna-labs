@@ -104,3 +104,62 @@ Switch(config)#int vlan 1
 Switch(config-if)#ip address 10.1.1.100 255.255.255.0 # or use ip address dhcp
 Switch(config-if)#no shutdown
 ```
+
+### DHCP Snooping
+
+- To use DHCP relay: use interface subcommand in the router interface facing the dhcp clients
+```bash
+ip helper-address <dhcp-server-ip>
+```
+
+- Setup the DHCP server.
+
+- On the switch in the client LAN:
+```
+ip dhcp snooping
+ip dhcp snooping vlan 1
+no ip dhcp snooping information option #only use in layer 3 switches
+```
+
+- On the trusted interface, towards the DHCP relay:
+```bash
+ip dhcp snooping trust
+#optionally regulate the rate of dhcp messages per second
+ip dhcp snooping rate limit <number-pps>
+```
+
+- Verify
+```bash
+# in enable mode
+show ip dhcp snooping
+```
+
+
+### Dynamic ARP Inspection Configuration
+
+- Configure switch global configuration command
+```bash
+ip arp inspection vlan 1
+errdisable recovery cause arp-inspection
+```
+- Then on the trusted interface
+```bash
+ip arp inspection trust
+```
+- Verify
+```bash
+show ip arp inspection
+show ip arp inspection statistics
+show ip arp inspection insterfaces
+```
+
+- configure rate and burst limits on interfaces
+```bash
+ip arp inspection limit rate 8
+ip arp inspection limit rate 8 burst interval 4
+```
+
+- Configure additional options to vaidate ip src and dst MAC addresses
+```bash
+ip arp inspection validate src-mac (ip and or dst-mac)
+```
