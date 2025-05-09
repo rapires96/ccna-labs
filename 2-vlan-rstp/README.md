@@ -1,7 +1,7 @@
 # VLAN, RSTP, Etherchannels and BPDU guard 
 
 Basic Vlan configuration, set RSTP interface settings, costs and priorities, etherchannels and loadbalacing, and bpdu guard.
-{vlan-rstp}[./lab2.png]
+![](./lab2.png)
 
 - VLAN trunk and access
 ```bash

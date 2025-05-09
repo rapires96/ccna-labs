@@ -1,6 +1,6 @@
 # IPv6 and Routing Basics
 
-[]{./testnet.png}
+[](./testnet.png)
 
 The lab has been configured with various types of IPv6 addresses (Link Local, and Global Unicast) and router's configuration shows the different types of static routes.
 

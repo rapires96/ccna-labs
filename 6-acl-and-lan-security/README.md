@@ -1,6 +1,6 @@
 # Access Control Lists and LAN Security
 
-{test-network}[./testnet.png]
+[](./testnet.png)
 
 ### Standard Access Lists
 Permits or Filters traffic based on source IP address.
